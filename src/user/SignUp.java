@@ -8,6 +8,7 @@ package user;
  *
  * @author ADMIN
  */
+
 public class SignUp extends javax.swing.JFrame {
 
     /**
@@ -61,10 +62,8 @@ public class SignUp extends javax.swing.JFrame {
         jLabel1.setText("Sign Up");
 
         jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
         jTextField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(0, 0, 0));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
@@ -72,7 +71,6 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jTextField3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(0, 0, 0));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -80,7 +78,6 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jPasswordField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField2ActionPerformed(evt);
@@ -88,7 +85,6 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jTextField4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
@@ -96,7 +92,6 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jTextField6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField6ActionPerformed(evt);
@@ -104,7 +99,6 @@ public class SignUp extends javax.swing.JFrame {
         });
 
         jTextField7.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(0, 0, 0));
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
@@ -155,7 +149,6 @@ public class SignUp extends javax.swing.JFrame {
 
         btcback.setBackground(new java.awt.Color(153, 153, 153));
         btcback.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btcback.setForeground(new java.awt.Color(0, 0, 0));
         btcback.setText("Back");
         btcback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
