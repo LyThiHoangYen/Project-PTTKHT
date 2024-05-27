@@ -213,7 +213,8 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btcbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcbackActionPerformed
-        // TODO add your handling code here:
+        new Login().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btcbackActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed

@@ -8,6 +8,7 @@ package user;
  *
  * @author ADMIN
  */
+
 public class SignUp extends javax.swing.JFrame {
 
     /**
@@ -173,7 +174,6 @@ public class SignUp extends javax.swing.JFrame {
 
         btcback.setBackground(new java.awt.Color(153, 153, 153));
         btcback.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        btcback.setForeground(new java.awt.Color(0, 0, 0));
         btcback.setText("Back");
         btcback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -307,7 +307,8 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btcbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcbackActionPerformed
-        // TODO add your handling code here:
+        new Login().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btcbackActionPerformed
 
     private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
