@@ -271,7 +271,8 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btcbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcbackActionPerformed
-        // TODO add your handling code here:
+        new Login().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btcbackActionPerformed
 
     private void jPasswordField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField2ActionPerformed
