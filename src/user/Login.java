@@ -47,6 +47,7 @@ public class Login extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel13 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -136,6 +137,7 @@ public class Login extends javax.swing.JFrame {
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user20.png"))); // NOI18N
 
         disable.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye-crossed.png"))); // NOI18N
+        disable.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         disable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 disableMouseClicked(evt);
@@ -143,6 +145,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         show.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye (1).png"))); // NOI18N
+        show.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         show.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 showMouseClicked(evt);
@@ -156,6 +159,7 @@ public class Login extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 51, 153));
         jLabel12.setText("Forget Password?");
+        jLabel12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel12MouseClicked(evt);
@@ -165,6 +169,7 @@ public class Login extends javax.swing.JFrame {
         jRadioButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jRadioButton1.setForeground(new java.awt.Color(0, 51, 153));
         jRadioButton1.setText("Manager");
+        jRadioButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton1ActionPerformed(evt);
@@ -174,11 +179,25 @@ public class Login extends javax.swing.JFrame {
         jRadioButton2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jRadioButton2.setForeground(new java.awt.Color(0, 51, 153));
         jRadioButton2.setText("Staff");
+        jRadioButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel13.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 51, 153));
         jLabel13.setText("SIGN UP");
-        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jButton1.setBackground(new java.awt.Color(0, 102, 204));
+        jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Login");
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+                jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel13MouseClicked(evt);
             }
@@ -196,7 +215,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 72, Short.MAX_VALUE)
+                        .addGap(0, 76, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
@@ -224,6 +243,10 @@ public class Login extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(366, Short.MAX_VALUE)
@@ -255,11 +278,13 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButton1)
                     .addComponent(jRadioButton2))
-                .addGap(98, 98, 98)
+                .addGap(45, 45, 45)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(jLabel11))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(206, Short.MAX_VALUE)
@@ -301,7 +326,7 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
-    private void buttonGradient1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonGradient1ActionPerformed
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonGradient1ActionPerformed
 
@@ -353,6 +378,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Electrazone;
     private javax.swing.JLabel disable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

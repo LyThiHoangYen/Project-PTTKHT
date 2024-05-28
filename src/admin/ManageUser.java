@@ -18,8 +18,9 @@ public class ManageUser extends javax.swing.JFrame {
      * Creates new form ManageUser
      */
     
-    Color textPrimaryColor = new Color(102, 120, 138);
-    Color primaryColor = new Color(42, 58, 73);
+    Color textPrimaryColor = new Color(255, 255, 255);
+    Color primaryColor = new Color(153,153,153);
+    Color closeColor = new Color(153,153,153);
     
     public ManageUser() {
         initComponents();
@@ -378,14 +379,12 @@ public class ManageUser extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
-   
-        
-        AdminDashboard.jPanel4.setBackground(primaryColor);
+        AdminDashboard.jPanel4.setBackground(closeColor);
         AdminDashboard.jPanel13.setBackground(primaryColor);
         AdminDashboard.jLabel10.setForeground(textPrimaryColor);
         AdminDashboard.jLabel6.setVisible(true);
         AdminDashboard.jLabel7.setVisible(false);
-        AdminDashboard.jLabel8.setVisible(true);
+        AdminDashboard.jLabel8.setVisible(false);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
