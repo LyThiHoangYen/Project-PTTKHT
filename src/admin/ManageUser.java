@@ -1,12 +1,9 @@
 package admin;
 
-import static admin.AdminDashboard.jLabel10;
-import static admin.AdminDashboard.jLabel6;
-import static admin.AdminDashboard.jPanel13;
-import static admin.AdminDashboard.jPanel4;
 
-import javax.swing.JOptionPane;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import user.Login;
 /**
  *
@@ -14,13 +11,9 @@ import user.Login;
  */
 public class ManageUser extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ManageUser
-     */
-    
-    Color textPrimaryColor = new Color(255, 255, 255);
+    Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153,153,153);
-    Color closeColor = new Color(153,153,153);
+     int xx, xy;
     
     public ManageUser() {
         initComponents();
@@ -67,10 +60,25 @@ public class ManageUser extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         kGradientPanel1.setkEndColor(new java.awt.Color(61, 220, 220));
         kGradientPanel1.setkStartColor(new java.awt.Color(137, 93, 253));
+        kGradientPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MouseDragged(evt);
+            }
+        });
+        kGradientPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MousePressed(evt);
+            }
+        });
 
         jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
@@ -379,12 +387,11 @@ public class ManageUser extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
-        AdminDashboard.jPanel4.setBackground(closeColor);
+        AdminDashboard.jPanel4.setBackground(primaryColor);
         AdminDashboard.jPanel13.setBackground(primaryColor);
         AdminDashboard.jLabel10.setForeground(textPrimaryColor);
         AdminDashboard.jLabel6.setVisible(true);
         AdminDashboard.jLabel7.setVisible(false);
-        AdminDashboard.jLabel8.setVisible(false);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -398,6 +405,27 @@ public class ManageUser extends javax.swing.JFrame {
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0.1; i<=1.0; i+=0.1){
+                String s = ""+i;
+                float f = Float.parseFloat(s);
+                this.setOpacity(f);            
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ManageUser.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    }//GEN-LAST:event_formWindowOpened
+
+    private void kGradientPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MousePressed
+        xx = evt.getX();
+        xy = evt.getY();    }//GEN-LAST:event_kGradientPanel1MousePressed
+
+    private void kGradientPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);     }//GEN-LAST:event_kGradientPanel1MouseDragged
 
     /**
      * @param args the command line arguments
