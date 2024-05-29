@@ -1,8 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package admin;
+
+
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import user.Login;
 
 /**
  *
@@ -13,6 +16,10 @@ public class Category extends javax.swing.JFrame {
     /**
      * Creates new form Category
      */
+    
+    Color textPrimaryColor = new Color(0, 0, 0);
+    Color primaryColor = new Color(153,153,153);
+    int xx, xy;
     public Category() {
         initComponents();
     }
@@ -44,9 +51,25 @@ public class Category extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         kGradientPanel1.setkEndColor(new java.awt.Color(61, 220, 220));
         kGradientPanel1.setkStartColor(new java.awt.Color(137, 93, 253));
+        kGradientPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MouseDragged(evt);
+            }
+        });
+        kGradientPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MousePressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,6 +99,8 @@ public class Category extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(0, 0, 0));
@@ -207,11 +232,39 @@ public class Category extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        System.exit(0);
+        setVisible(false);
+        AdminDashboard.jPanel5.setBackground(primaryColor);
+        AdminDashboard.jPanel14.setBackground(primaryColor);
+        AdminDashboard.jLabel11.setForeground(textPrimaryColor);
+        AdminDashboard.jLabel12.setVisible(true);
+        AdminDashboard.jLabel13.setVisible(false);
+     
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0.1; i<=1.0; i+=0.1){
+                String s = ""+i;
+                float f = Float.parseFloat(s);
+                this.setOpacity(f);            
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Category.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    }//GEN-LAST:event_formWindowOpened
+
+    private void kGradientPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MousePressed
+         xx = evt.getX();
+         xy = evt.getY();      }//GEN-LAST:event_kGradientPanel1MousePressed
+
+    private void kGradientPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);     }//GEN-LAST:event_kGradientPanel1MouseDragged
 
     /**
      * @param args the command line arguments

@@ -3,19 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package user;
-
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author ADMIN
  */
 public class PurchaseDetail extends javax.swing.JFrame {
-
+    Color textPrimaryColor = new Color(0, 0, 0);
+    Color primaryColor = new Color(153,153,153);
     /**
      * Creates new form PurchaseDetail
      */
     public PurchaseDetail() {
         initComponents();
     }
+    int xx, xy;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -43,11 +48,26 @@ public class PurchaseDetail extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         kGradientPanel1.setBackground(new java.awt.Color(204, 204, 204));
         kGradientPanel1.setForeground(new java.awt.Color(0, 0, 0));
         kGradientPanel1.setkEndColor(new java.awt.Color(24, 220, 220));
         kGradientPanel1.setkStartColor(new java.awt.Color(137, 93, 253));
+        kGradientPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MouseDragged(evt);
+            }
+        });
+        kGradientPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MousePressed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -72,7 +92,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("X");
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -103,9 +123,9 @@ public class PurchaseDetail extends javax.swing.JFrame {
         jTextField4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setBackground(new java.awt.Color(0, 51, 153));
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Refund");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +133,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(204, 204, 204));
+        jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Clear");
@@ -222,8 +242,12 @@ public class PurchaseDetail extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel7MouseClicked
+        setVisible(false);
+        UserDashboard.jPanel5.setBackground(primaryColor);
+        UserDashboard.jPanel14.setBackground(primaryColor);
+        UserDashboard.PurchaseDetails.setForeground(textPrimaryColor);
+        UserDashboard.jLabel20.setVisible(true);
+        UserDashboard.jLabel21.setVisible(false);     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -240,6 +264,27 @@ public class PurchaseDetail extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0.1; i<=1.0; i+=0.1){
+                String s = ""+i;
+                float f = Float.parseFloat(s);
+                this.setOpacity(f);            
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PurchaseDetail.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    }//GEN-LAST:event_formWindowOpened
+
+    private void kGradientPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MousePressed
+        xx = evt.getX();
+        xy = evt.getY();     }//GEN-LAST:event_kGradientPanel1MousePressed
+
+    private void kGradientPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);    }//GEN-LAST:event_kGradientPanel1MouseDragged
 
     /**
      * @param args the command line arguments

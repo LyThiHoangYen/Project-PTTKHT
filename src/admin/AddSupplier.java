@@ -1,15 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package admin;
 
+import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author ADMIN
  */
 public class AddSupplier extends javax.swing.JFrame {
-
+    Color textPrimaryColor = new Color(0, 0, 0);
+    Color primaryColor = new Color(153,153,153);
+   
+    int xx, xy;
     /**
      * Creates new form AddSupplier
      */
@@ -44,14 +47,30 @@ public class AddSupplier extends javax.swing.JFrame {
         btcback = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         kGradientPanel1.setkEndColor(new java.awt.Color(61, 220, 220));
         kGradientPanel1.setkStartColor(new java.awt.Color(137, 93, 253));
+        kGradientPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MouseDragged(evt);
+            }
+        });
+        kGradientPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                kGradientPanel1MousePressed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
 
-        jTextField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(0, 0, 0));
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +78,7 @@ public class AddSupplier extends javax.swing.JFrame {
             }
         });
 
-        jTextField3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +86,7 @@ public class AddSupplier extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jPasswordField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jPasswordField2.setForeground(new java.awt.Color(0, 0, 0));
         jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +94,7 @@ public class AddSupplier extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField4.setForeground(new java.awt.Color(0, 0, 0));
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,7 +102,7 @@ public class AddSupplier extends javax.swing.JFrame {
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jTextField6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(0, 0, 0));
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,6 +239,7 @@ public class AddSupplier extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -243,8 +263,12 @@ public class AddSupplier extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        System.exit(0);
-    }//GEN-LAST:event_jLabel7MouseClicked
+        setVisible(false);
+        AdminDashboard.jPanel7.setBackground(primaryColor);
+        AdminDashboard.jPanel16.setBackground(primaryColor);
+        AdminDashboard.jLabel15.setForeground(textPrimaryColor);
+        AdminDashboard.jLabel20.setVisible(true);
+        AdminDashboard.jLabel21.setVisible(false);    }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btcbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btcbackActionPerformed
         // TODO add your handling code here:
@@ -253,6 +277,29 @@ public class AddSupplier extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for(double i = 0.1; i<=1.0; i+=0.1){
+                String s = ""+i;
+                float f = Float.parseFloat(s);
+                this.setOpacity(f);            
+            try {
+                Thread.sleep(40);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(AddSupplier.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }    }//GEN-LAST:event_formWindowOpened
+
+    private void kGradientPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        this.setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_kGradientPanel1MouseDragged
+
+    private void kGradientPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MousePressed
+         xx = evt.getX();
+         xy = evt.getY();
+    }//GEN-LAST:event_kGradientPanel1MousePressed
 
     /**
      * @param args the command line arguments
