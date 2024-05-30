@@ -4,10 +4,17 @@
  */
 package user;
 
+import admin.AdminDashboard;
+import connection.MyConnection;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 
 /**
@@ -20,8 +27,10 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    private ButtonGroup bg = new ButtonGroup();
     public Login() {
         initComponents();
+        init ();
     }
 
     /**
@@ -210,12 +219,22 @@ public class Login extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(0, 51, 153));
         jLabel13.setText("SIGN UP");
         jLabel13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
         jButton1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Login");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -312,6 +331,27 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init() {
+        bg.add(jRadioButton2);
+        bg.add(jRadioButton1);
+        jRadioButton2.setSelected(true);
+    }
+    
+    private boolean isEmpty(){
+        if(txtemail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Email address is required","Warning",2);
+            return false;
+        }if(!txtemail.getText().matches("^.+@.+\\..+$")){
+            JOptionPane.showMessageDialog(this, "Invalid email address","Warning",2);
+            return false;
+        }
+        if (String.valueOf(txtPassword.getPassword()).isEmpty()){
+            JOptionPane.showMessageDialog(this, "Password is required","Warning",2);
+            return false;
+        }
+        return true;
+    }
+    
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -375,6 +415,52 @@ public class Login extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (isEmpty()) {
+            String email = txtemail.getText();
+            String password = String.valueOf(txtPassword.getPassword());
+            if (jRadioButton2.isSelected()) {
+                try {
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from staff where semail =? and spassword= ?");
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        UserDashboard ud = new UserDashboard();
+                        ud.setVisible(true);
+                        ud.pack();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else if (jRadioButton1.isSelected()) {
+                try {
+                    Connection con = MyConnection.getConnection();
+                    PreparedStatement ps;
+                    ps = con.prepareStatement("select * from admin where email =? and password= ?");
+                    ps.setString(1, email);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next()) {
+                        AdminDashboard ad = new AdminDashboard();
+                        ad.setVisible(true);
+                        ad.pack();
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
