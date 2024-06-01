@@ -92,7 +92,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         kGradientPanel2 = new keeptoo.KGradientPanel();
         Electrazone1 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
+        adminEmail = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -582,11 +582,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         });
         kGradientPanel2.add(Electrazone1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 294, 50));
 
-        jLabel45.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel45.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel45.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons.png"))); // NOI18N
-        jLabel45.setText("admin@gmail.com");
-        kGradientPanel2.add(jLabel45, new org.netbeans.lib.awtextra.AbsoluteConstraints(941, 6, -1, 38));
+        adminEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        adminEmail.setForeground(new java.awt.Color(0, 51, 153));
+        adminEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons.png"))); // NOI18N
+        adminEmail.setText("admin@gmail.com");
+        kGradientPanel2.add(adminEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(941, 6, -1, 38));
 
         jLabel46.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(0, 51, 153));
@@ -795,6 +795,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Electrazone1;
     public static javax.swing.JPanel TransactionPanel;
+    public static javax.swing.JLabel adminEmail;
     public static javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel11;
     public static javax.swing.JLabel jLabel12;
@@ -828,7 +829,6 @@ public class AdminDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
-    private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
     public static javax.swing.JLabel jLabel6;
     public static javax.swing.JLabel jLabel7;

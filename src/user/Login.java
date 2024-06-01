@@ -365,7 +365,7 @@ public class Login extends javax.swing.JFrame {
       disable.setVisible(true);
       disable.setEnabled(true);
       show.setEnabled(false);
-      show.setEnabled(false);     // TODO add your handling code here:
+      show.setEnabled(false);    
     }//GEN-LAST:event_showMouseClicked
 
     private void disableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_disableMouseClicked
@@ -432,6 +432,7 @@ public class Login extends javax.swing.JFrame {
                         UserDashboard ud = new UserDashboard();
                         ud.setVisible(true);
                         ud.pack();
+                        UserDashboard.userEmail.setText(email);
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
@@ -451,6 +452,7 @@ public class Login extends javax.swing.JFrame {
                         AdminDashboard ad = new AdminDashboard();
                         ad.setVisible(true);
                         ad.pack();
+                        AdminDashboard.adminEmail.setText(email);
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);

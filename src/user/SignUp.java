@@ -4,22 +4,29 @@
  */
 package user;
 
+import dao.UserDao;
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author ADMIN
  */
-
 public class SignUp extends javax.swing.JFrame {
+
     int xx, xy;
 
     /**
      * Creates new form SignUp
      */
+    UserDao user = new UserDao();
+    Color notEdit = new Color(204, 204, 204);
+
     public SignUp() {
         initComponents();
+        init();
     }
 
     /**
@@ -108,6 +115,11 @@ public class SignUp extends javax.swing.JFrame {
                 jTextField2ActionPerformed(evt);
             }
         });
+        jTextField2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField2KeyTyped(evt);
+            }
+        });
 
         jTextField3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +139,11 @@ public class SignUp extends javax.swing.JFrame {
         jTextField4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField4ActionPerformed(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField4KeyTyped(evt);
             }
         });
 
@@ -176,6 +193,11 @@ public class SignUp extends javax.swing.JFrame {
         btnSave.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -189,6 +211,11 @@ public class SignUp extends javax.swing.JFrame {
         btcback.setBackground(new java.awt.Color(153, 153, 153));
         btcback.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btcback.setText("Back");
+        btcback.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btcbackMouseClicked(evt);
+            }
+        });
         btcback.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btcbackActionPerformed(evt);
@@ -209,8 +236,18 @@ public class SignUp extends javax.swing.JFrame {
         jLabel11.setText("Answer");
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye-crossed.png"))); // NOI18N
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye (1).png"))); // NOI18N
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -316,6 +353,54 @@ public class SignUp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init() {
+        jTextField1.setBackground(notEdit);
+        jTextField1.setText(String.valueOf(user.getMaxRow()));
+    }
+
+    public boolean isEmpty() {
+        if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email address is required", "Warning", 2);
+            return false;
+        }
+        if (!jTextField3.getText().matches("^.+@.+\\..+$")) {
+            JOptionPane.showMessageDialog(this, "Invalid email address", "Warning", 2);
+            return false;
+        }
+        if (String.valueOf(txtpassword.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField4.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Phone number is required", "Warning", 2);
+            return false;
+        }
+         if (jTextField4.getText().length() > 15) {
+            JOptionPane.showMessageDialog(this, "Phone number is too long", "Warning", 2);
+            return false;
+        }
+         if (jTextField4.getText().length() < 10) {
+            JOptionPane.showMessageDialog(this, "Phone number is too short", "Warning", 2);
+            return false;
+        }
+         if (jTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Address is required", "Warning", 2);
+            return false;
+        }
+          if (jComboBox3.getSelectedIndex()== -1) {
+            JOptionPane.showMessageDialog(this, "Security question is required", "Warning", 2);
+            return false;
+        }
+         if (jTextField7.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Security answer is required", "Warning", 2);
+            return false;
+        }
+        return true;
+    }
     private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField7ActionPerformed
@@ -348,8 +433,8 @@ public class SignUp extends javax.swing.JFrame {
     private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
-        
-    
+
+
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
@@ -363,10 +448,10 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0.1; i<=1.0; i+=0.1){
-                String s = ""+i;
-                float f = Float.parseFloat(s);
-                this.setOpacity(f);            
+        for (double i = 0.1; i <= 1.0; i += 0.1) {
+            String s = "" + i;
+            float f = Float.parseFloat(s);
+            this.setOpacity(f);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -382,6 +467,64 @@ public class SignUp extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);    }//GEN-LAST:event_kGradientPanel1MouseDragged
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(isEmpty()){
+            int id = Integer.parseInt(jTextField1.getText());
+            String username = jTextField2.getText();
+            String email = jTextField3.getText();
+            String password = String.valueOf(txtpassword.getPassword());
+            String phone = jTextField4.getText();
+            String seq = jComboBox3.getSelectedItem().toString();
+            String ans = jTextField7.getText();
+            String address = jTextField6.getText();
+            if (!user.isEmailExist(email)) {
+                if (!user.isPhoneExist(phone)){
+                    user.insert(id, username, email, password, phone, address, seq, ans);
+                    new Login().setVisible(true);
+                    this.dispose();
+                }else {
+                    JOptionPane.showMessageDialog(this, "This phone number already exists", "Warning",2);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "This email address already exists", "Warning",2);
+            }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void jTextField2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField2KeyTyped
+        char input = evt.getKeyChar();
+        if(!(input < '0' || input > '9') && input != '\b'){
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Username doesn't contain any numbers!","Warning",2);
+        }
+    }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField4KeyTyped
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        txtpassword.setEchoChar((char) 0);
+        jLabel8.setVisible(false);
+        jLabel8.setEnabled(false);
+        jLabel12.setEnabled(true);
+        jLabel12.setEnabled(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        txtpassword.setEchoChar('*');
+        jLabel8.setVisible(true);
+        jLabel8.setEnabled(true);
+        jLabel12.setEnabled(false);
+        jLabel12.setEnabled(false);
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void btcbackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btcbackMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btcbackMouseClicked
 
     /**
      * @param args the command line arguments

@@ -4,9 +4,11 @@
  */
 package user;
 
+import dao.ForgotPasswordDao;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,8 +19,13 @@ public class ForgotPassword extends javax.swing.JFrame {
     /**
      * Creates new form ForgotPassword
      */
+    ForgotPasswordDao fg = new ForgotPasswordDao();
+    Color notEdit = new Color(204,204,204);
+    Color edit = new Color(255,255,255);
+    
     public ForgotPassword() {
         initComponents();
+        init();
     }
     int xx, xy;
 
@@ -97,6 +104,21 @@ public class ForgotPassword extends javax.swing.JFrame {
         btnSave.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnSave.setForeground(new java.awt.Color(255, 255, 255));
         btnSave.setText("Save");
+        btnSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveMouseClicked(evt);
+            }
+        });
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        btnSave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnSaveKeyPressed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -118,6 +140,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/search2.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 0, 0));
@@ -140,8 +167,18 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye-crossed.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye (1).png"))); // NOI18N
+        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel10MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -235,6 +272,16 @@ public class ForgotPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init(){
+        jTextField5.setBackground(notEdit);
+        jTextField6.setBackground(notEdit);
+        jPasswordField2.setBackground(notEdit);
+        jTextField5.setEditable(false);
+        jTextField6.setEditable(false);
+        jPasswordField2.setEditable(false);
+        btnSave.setEnabled(false);
+    }
+    
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
@@ -268,6 +315,81 @@ public class ForgotPassword extends javax.swing.JFrame {
             }
         }        
     }//GEN-LAST:event_formWindowOpened
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+      jPasswordField2.setEchoChar((char) 0);
+      jLabel2.setVisible(true);
+      jLabel2.setEnabled(true);
+      jLabel10.setEnabled(false);
+      jLabel10.setEnabled(false);        
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
+      jPasswordField2.setEchoChar('*');
+      jLabel2.setVisible(false);
+      jLabel2.setEnabled(false);
+      jLabel10.setEnabled(true);
+      jLabel10.setEnabled(true);   
+    }//GEN-LAST:event_jLabel10MouseClicked
+    
+    private boolean isEmpty() {
+        if (jTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Security answer is required", "Warning", 2);
+            return false;
+        }
+        if (String.valueOf(jPasswordField2.getPassword()).isEmpty()){
+            JOptionPane.showMessageDialog(this, "Please enter new password", "Warning", 2);
+            return false;
+        }
+        return true;
+    }
+    
+    private boolean emailValidation(){
+        if (jTextField3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter your email address", "Warning", 2);
+            return false;
+        }
+        if (!jTextField3.getText().matches("^.+@.+\\..+$")) {
+            JOptionPane.showMessageDialog(this, "Invalid email address", "Warning", 2);
+            return false;
+        }
+        return true;
+    }
+    
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        if(emailValidation()){
+            if(fg.isEmailExist(jTextField3.getText())){
+                jTextField3.setBackground(notEdit);
+                jTextField3.setEditable(false);
+                jTextField6.setBackground(edit);
+                jTextField6.setEditable(true);
+                jPasswordField2.setBackground(edit);
+                jPasswordField2.setEditable(true);
+                btnSave.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void btnSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSaveKeyPressed
+         // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveKeyPressed
+
+    private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSaveMouseClicked
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(isEmpty()){
+            String email = jTextField3.getText();
+            String ans = jTextField6.getText();
+            if(fg.getAns(email, ans)){
+                String pass = String.valueOf(jPasswordField2.getPassword());
+                fg.setPassword(email, pass);
+                new Login().setVisible(true);
+                this.dispose();
+            }
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,7 +441,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField5;
+    public static javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private keeptoo.KGradientPanel kGradientPanel1;
     // End of variables declaration//GEN-END:variables
