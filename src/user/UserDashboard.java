@@ -51,7 +51,7 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         kGradientPanel1 = new keeptoo.KGradientPanel();
         Electrazone = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        userEmail = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -113,11 +113,11 @@ public class UserDashboard extends javax.swing.JFrame {
         Electrazone.setToolTipText("");
         kGradientPanel1.add(Electrazone, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 294, 50));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 153));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons.png"))); // NOI18N
-        jLabel1.setText("user@gmail.com");
-        kGradientPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(941, 6, -1, 38));
+        userEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        userEmail.setForeground(new java.awt.Color(0, 51, 153));
+        userEmail.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons.png"))); // NOI18N
+        userEmail.setText("user@gmail.com");
+        kGradientPanel1.add(userEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(941, 6, -1, 38));
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 51, 153));
@@ -494,7 +494,6 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel Electrazone;
     public static javax.swing.JLabel Myaccount;
     public static javax.swing.JLabel PurchaseDetails;
-    private javax.swing.JLabel jLabel1;
     public static javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel12;
     public static javax.swing.JLabel jLabel13;
@@ -523,5 +522,6 @@ public class UserDashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanel5;
     public static javax.swing.JPanel jPanel6;
     private keeptoo.KGradientPanel kGradientPanel1;
+    public static javax.swing.JLabel userEmail;
     // End of variables declaration//GEN-END:variables
 }
