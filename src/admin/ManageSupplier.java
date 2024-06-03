@@ -4,25 +4,33 @@
  */
 package admin;
 
+import dao.SupplierDao;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import user.Login;
+
 /**
  *
  * @author ADMIN
  */
 public class ManageSupplier extends javax.swing.JFrame {
-    Color textPrimaryColor = new Color(0, 0, 0);
-    Color primaryColor = new Color(153,153,153);
-     int xx, xy;
 
-  
+    SupplierDao supplier = new SupplierDao();
+    Color textPrimaryColor = new Color(0, 0, 0);
+    Color primaryColor = new Color(153, 153, 153);
+    int xx, xy;
+    DefaultTableModel model;
+    int rowIndex;
+
     /**
      * Creates new form ManageSupplier
      */
     public ManageSupplier() {
         initComponents();
+        supplierTable();
     }
 
     /**
@@ -56,6 +64,8 @@ public class ManageSupplier extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jTextField5 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -125,7 +135,7 @@ public class ManageSupplier extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("User Name");
+        jLabel2.setText("Username");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -151,6 +161,11 @@ public class ManageSupplier extends javax.swing.JFrame {
         btnUpdate.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -175,6 +190,11 @@ public class ManageSupplier extends javax.swing.JFrame {
         btnClear.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         btnClear.setForeground(new java.awt.Color(255, 255, 255));
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 0, 0));
@@ -187,7 +207,7 @@ public class ManageSupplier extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Supplier ID", "Name", "Email", "Password", "Phone", "Address"
+                "Supplier ID", "Username", "Email", "Password", "Phone", "Address"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -199,6 +219,11 @@ public class ManageSupplier extends javax.swing.JFrame {
             }
         });
         jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -211,6 +236,20 @@ public class ManageSupplier extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("Search");
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye-crossed.png"))); // NOI18N
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
+
+        jLabel13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/eye (1).png"))); // NOI18N
+        jLabel13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel13MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout kGradientPanel1Layout = new javax.swing.GroupLayout(kGradientPanel1);
         kGradientPanel1.setLayout(kGradientPanel1Layout);
@@ -230,25 +269,30 @@ public class ManageSupplier extends javax.swing.JFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 689, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(kGradientPanel1Layout.createSequentialGroup()
                                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel2)
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel3)
-                                        .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(69, 69, 69)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel11)
+                                                .addComponent(jLabel13))))
+                                    .addGap(93, 93, 93)
                                     .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField6)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jTextField7)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
                                             .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
                                             .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                        .addComponent(btnClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(30, 30, 30))))
         );
@@ -257,44 +301,50 @@ public class ManageSupplier extends javax.swing.JFrame {
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addGap(3, 3, 3)
+                .addGap(4, 4, 4)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(1, 1, 1)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(2, 2, 2)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(kGradientPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(kGradientPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
                         .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
+                        .addGap(25, 25, 25)
                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -302,16 +352,76 @@ public class ManageSupplier extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(kGradientPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(kGradientPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void supplierTable() {
+        supplier.getSupplierValue(jTable1, "");
+        model = (DefaultTableModel) jTable1.getModel();
+        jTable1.setRowHeight(30);
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(Color.BLACK);
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.LIGHT_GRAY);
+    }
+
+    private void clear() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTextField7.setText("");
+        jTextField6.setText("");
+        jPasswordField2.setText("");
+
+    }
+
+    public boolean isEmpty() {
+        if (jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a supplier", "Warning", 2);
+            return false;
+        }
+        if (jTextField3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Email address is required", "Warning", 2);
+            return false;
+        }
+        if (!jTextField2.getText().matches("^.+@.+\\..+$")) {
+            JOptionPane.showMessageDialog(this, "Invalid email address", "Warning", 2);
+            return false;
+        }
+        if (String.valueOf(jPasswordField2.getPassword()).isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Password is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField7.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Phone number is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField7.getText().length() > 15) {
+            JOptionPane.showMessageDialog(this, "Phone number is too long", "Warning", 2);
+            return false;
+        }
+        if (jTextField7.getText().length() < 10) {
+            JOptionPane.showMessageDialog(this, "Phone number is too short", "Warning", 2);
+            return false;
+        }
+        if (jTextField6.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Address is required", "Warning", 2);
+            return false;
+        }
+        return true;
+    }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -335,15 +445,23 @@ public class ManageSupplier extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
-        AdminDashboard.jPanel8.setBackground(primaryColor);
-        AdminDashboard.jPanel17.setBackground(primaryColor);
-        AdminDashboard.jLabel23.setForeground(textPrimaryColor);
-        AdminDashboard.jLabel24.setVisible(true);
-        AdminDashboard.jLabel25.setVisible(false);
+        //AdminDashboard.jPanel8.setBackground(primaryColor);
+        //AdminDashboard.jPanel17.setBackground(primaryColor);
+        //AdminDashboard.jLabel23.setForeground(textPrimaryColor);
+        //AdminDashboard.jLabel24.setVisible(true);
+        //AdminDashboard.jLabel25.setVisible(false);
          }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        if (jTextField1.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a supplier", "Warning", 2);
+        } else {
+            int id = Integer.valueOf(jTextField1.getText());
+            supplier.delete(id);
+            jTable1.setModel(new DefaultTableModel(null, new Object[]{"User ID", "User Name", "Email", "Password", "Phone", "Address"}));
+            supplier.getSupplierValue(jTable1, "");
+            clear();
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
@@ -351,10 +469,10 @@ public class ManageSupplier extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0.1; i<=1.0; i+=0.1){
-                String s = ""+i;
-                float f = Float.parseFloat(s);
-                this.setOpacity(f);            
+        for (double i = 0.1; i <= 1.0; i += 0.1) {
+            String s = "" + i;
+            float f = Float.parseFloat(s);
+            this.setOpacity(f);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -372,46 +490,94 @@ public class ManageSupplier extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);     }//GEN-LAST:event_kGradientPanel1MouseDragged
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManageSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManageSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManageSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManageSupplier.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        jPasswordField2.setEchoChar((char) 0);
+        jLabel11.setVisible(true);
+        jLabel11.setEnabled(true);
+        jLabel13.setEnabled(false);
+        jLabel13.setEnabled(false);
+    }//GEN-LAST:event_jLabel11MouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ManageSupplier().setVisible(true);
+    private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
+        jPasswordField2.setEchoChar('*');
+        jLabel11.setVisible(false);
+        jLabel11.setEnabled(false);
+        jLabel13.setEnabled(true);
+        jLabel13.setEnabled(true);
+    }//GEN-LAST:event_jLabel13MouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        model = (DefaultTableModel) jTable1.getModel();
+        rowIndex = jTable1.getSelectedRow();
+        jTextField1.setText(model.getValueAt(rowIndex, 0).toString());
+        jTextField3.setText(model.getValueAt(rowIndex, 1).toString());
+        jTextField2.setText(model.getValueAt(rowIndex, 2).toString());
+        jPasswordField2.setText(model.getValueAt(rowIndex, 3).toString());
+        jTextField7.setText(model.getValueAt(rowIndex, 4).toString());
+        jTextField6.setText(model.getValueAt(rowIndex, 5).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        if (isEmpty()) {
+            int id = Integer.parseInt(jTextField1.getText());
+            String username = jTextField3.getText();
+            String email = jTextField2.getText();
+            String password = String.valueOf(jPasswordField2.getPassword());
+            String phone = jTextField7.getText();
+            String address = jTextField6.getText();
+            supplier.update(id, username, email, password, phone, address);
+            jTable1.setModel(new DefaultTableModel(null, new Object[]{"User ID", "User Name", "Email", "Password", "Phone", "Address"}));
+            supplier.getSupplierValue(jTable1, "");
+            clear();
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private boolean check() {
+        String newUsername = jTextField3.getText();
+        String newEmail = jTextField2.getText();
+        String newPhone = jTextField7.getText();
+        String oldUsername = model.getValueAt(rowIndex, 1).toString();
+        String oldEmail = model.getValueAt(rowIndex, 2).toString();
+        String oldPhone = model.getValueAt(rowIndex, 4).toString();
+        if (newUsername.equals(oldUsername) && newEmail.equals(oldEmail) && newPhone.equals(oldPhone)) {
+            return false;
+        } else {
+            if (!newUsername.equals(oldUsername)) {
+                boolean x = supplier.isUsernameExist(newUsername);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This username already exists", "Warning", 2);
+                }
+                return x;
             }
-        });
+            if (!newEmail.equals(oldEmail)) {
+                boolean x = supplier.isEmailExist(newEmail);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This email already exists", "Warning", 2);
+                }
+                return x;
+            }
+            if (!newPhone.equals(oldPhone)) {
+                boolean x = supplier.isPhoneExist(newPhone);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This phone number already exist", "Warning", 2);
+                }
+                return x;
+            }
+        }
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClear;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
