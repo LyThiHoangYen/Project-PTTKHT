@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class UserDao {
@@ -114,7 +116,7 @@ public class UserDao {
         int x = JOptionPane.showConfirmDialog(null, "Are you sure to delete this account?","Delete account", JOptionPane.OK_CANCEL_OPTION,0);
         if(x == JOptionPane.OK_OPTION){
             try {
-                ps = con.prepareStatement("delete from staff wwhere sid = ?");
+                ps = con.prepareStatement("delete from staff where sid = ?");
                 ps.setInt(1, id);
                 if(ps.executeUpdate() > 0){
                     JOptionPane.showMessageDialog(null, "Account deleted");
@@ -162,5 +164,31 @@ public class UserDao {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return id;
+    }
+    
+    //get users data
+    public void getUsersValue(JTable table, String search){
+        String sql = "select * from staff where concat(sid, sname, semail) like ? order by sid desc";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, "%"+search +"%");
+            rs = ps.executeQuery();
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            Object [] row;
+            while(rs.next()){
+                row = new Object[8];
+                row[0] = rs.getInt(1);
+                row[1] = rs.getString(2);
+                row[2] = rs.getString(3);
+                row[3] = rs.getString(4);
+                row[4] = rs.getString(5);
+                row[5] = rs.getString(6);
+                row[6] = rs.getString(7);
+                row[7] = rs.getString(8);  
+                model.addRow(row);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

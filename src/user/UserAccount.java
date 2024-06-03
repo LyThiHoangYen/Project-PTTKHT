@@ -112,6 +112,11 @@ public class UserAccount extends javax.swing.JFrame {
                 jTextField3ActionPerformed(evt);
             }
         });
+        jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField3KeyTyped(evt);
+            }
+        });
 
         jPasswordField2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jPasswordField2.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +143,11 @@ public class UserAccount extends javax.swing.JFrame {
         jTextField7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField7ActionPerformed(evt);
+            }
+        });
+        jTextField7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField7KeyTyped(evt);
             }
         });
 
@@ -477,6 +487,20 @@ public class UserAccount extends javax.swing.JFrame {
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jTextField3KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyTyped
+       char input = evt.getKeyChar();
+        if(!(input < '0' || input > '9') && input != '\b'){
+            evt.consume();
+            JOptionPane.showMessageDialog(this, "Username doesn't contain any numbers!","Warning",2);
+        }
+    }//GEN-LAST:event_jTextField3KeyTyped
+
+    private void jTextField7KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField7KeyTyped
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        }
+    }//GEN-LAST:event_jTextField7KeyTyped
 
     private boolean check(){
         String newEmail = jTextField2.getText();
