@@ -232,6 +232,11 @@ public class ManageSupplier extends javax.swing.JFrame {
                 jTextField5ActionPerformed(evt);
             }
         });
+        jTextField5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField5KeyReleased(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(0, 0, 0));
@@ -445,11 +450,11 @@ public class ManageSupplier extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
-        //AdminDashboard.jPanel8.setBackground(primaryColor);
-        //AdminDashboard.jPanel17.setBackground(primaryColor);
-        //AdminDashboard.jLabel23.setForeground(textPrimaryColor);
-        //AdminDashboard.jLabel24.setVisible(true);
-        //AdminDashboard.jLabel25.setVisible(false);
+        AdminDashboard.jPanel8.setBackground(primaryColor);
+        AdminDashboard.jPanel17.setBackground(primaryColor);
+        AdminDashboard.jLabel23.setForeground(textPrimaryColor);
+        AdminDashboard.jLabel24.setVisible(true);
+        AdminDashboard.jLabel25.setVisible(false);
          }//GEN-LAST:event_jLabel7MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -535,6 +540,11 @@ public class ManageSupplier extends javax.swing.JFrame {
             clear();
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void jTextField5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField5KeyReleased
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"User ID", "User Name", "Email", "Password", "Phone", "Address"}));
+        supplier.getSupplierValue(jTable1, jTextField5.getText());
+    }//GEN-LAST:event_jTextField5KeyReleased
 
     private boolean check() {
         String newUsername = jTextField3.getText();
