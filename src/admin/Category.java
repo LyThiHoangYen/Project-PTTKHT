@@ -1,10 +1,11 @@
-
 package admin;
 
-
+import dao.CategoryDao;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import user.Login;
 
 /**
@@ -16,12 +17,17 @@ public class Category extends javax.swing.JFrame {
     /**
      * Creates new form Category
      */
-    
+    CategoryDao cat = new CategoryDao();
     Color textPrimaryColor = new Color(0, 0, 0);
-    Color primaryColor = new Color(153,153,153);
+    Color primaryColor = new Color(153, 153, 153);
     int xx, xy;
+    Color notEdit = new Color(204, 204, 204);
+    DefaultTableModel model;
+    int rowIndex;
+
     public Category() {
         initComponents();
+        init();
     }
 
     /**
@@ -98,10 +104,21 @@ public class Category extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
+        jTextField2.setEditable(false);
         jTextField2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField2.setForeground(new java.awt.Color(0, 0, 0));
 
@@ -127,21 +144,41 @@ public class Category extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Save");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Update");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Delete");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setBackground(new java.awt.Color(153, 153, 153));
         jButton4.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Clear");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
@@ -235,6 +272,42 @@ public class Category extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init() {
+        jTextField2.setBackground(notEdit);
+        jTextField2.setText(String.valueOf(cat.getMaxRow()));
+        categoryTable();
+    }
+
+    private void categoryTable() {
+        cat.getCategoriesValue(jTable1, "");
+        model = (DefaultTableModel) jTable1.getModel();
+        jTable1.setRowHeight(30);
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(Color.BLACK);
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.LIGHT_GRAY);
+    }
+
+    private void clear() {
+        jTextField1.setText("");
+        jTextField2.setText(String.valueOf(cat.getMaxRow()));
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTable1.clearSelection();
+    }
+
+    private boolean isEmpty() {
+        if (jTextField3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Category name is required", "Warning", 2);
+            return false;
+        }
+        if (jTextField4.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Description is required", "Warning", 2);
+            return false;
+        }
+        return true;
+    }
+
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
         AdminDashboard.jPanel5.setBackground(primaryColor);
@@ -242,14 +315,14 @@ public class Category extends javax.swing.JFrame {
         AdminDashboard.jLabel11.setForeground(textPrimaryColor);
         AdminDashboard.jLabel12.setVisible(true);
         AdminDashboard.jLabel13.setVisible(false);
-     
+
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0.1; i<=1.0; i+=0.1){
-                String s = ""+i;
-                float f = Float.parseFloat(s);
-                this.setOpacity(f);            
+        for (double i = 0.1; i <= 1.0; i += 0.1) {
+            String s = "" + i;
+            float f = Float.parseFloat(s);
+            this.setOpacity(f);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -258,7 +331,7 @@ public class Category extends javax.swing.JFrame {
         }    }//GEN-LAST:event_formWindowOpened
 
     private void kGradientPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MousePressed
-         xx = evt.getX();
+        xx = evt.getX();
          xy = evt.getY();      }//GEN-LAST:event_kGradientPanel1MousePressed
 
     private void kGradientPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kGradientPanel1MouseDragged
@@ -266,39 +339,93 @@ public class Category extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);     }//GEN-LAST:event_kGradientPanel1MouseDragged
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (isEmpty()) {
+            int id = Integer.parseInt(jTextField2.getText());
+            String cname = jTextField3.getText();
+            String desc = jTextField4.getText();
+            if (!cat.isIDExist(id)) {
+                if (!cat.isCategoryExist(cname)) {
+                    cat.insert(id, cname, desc);
+                    jTable1.setModel(new DefaultTableModel(null, new Object[]{"Category ID", "Category Name", "Description"}));
+                    cat.getCategoriesValue(jTable1, "");
+                    clear();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Category name already exists", "Warning", 2);
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "Category id already exists", "Warning", 2);
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Category.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Category().setVisible(true);
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        clear();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (isEmpty()) {
+            int id = Integer.parseInt(jTextField2.getText());
+            if (cat.isIDExist(id)) {
+                if (!check()) {
+                    String cname = jTextField3.getText();
+                    String desc = jTextField4.getText();
+                    cat.update(id, cname, desc);
+                    jTable1.setModel(new DefaultTableModel(null, new Object[]{"Category ID", "Category Name", "Description"}));
+                    cat.getCategoriesValue(jTable1, "");
+                    clear();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Category id doesn't exist", "Warning", 2);
             }
-        });
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        model = (DefaultTableModel) jTable1.getModel();
+        rowIndex = jTable1.getSelectedRow();
+        jTextField2.setText(model.getValueAt(rowIndex, 0).toString());
+        jTextField3.setText(model.getValueAt(rowIndex, 1).toString());
+        jTextField4.setText(model.getValueAt(rowIndex, 2).toString());
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Category ID", "Category Name", "Description"}));
+        cat.getCategoriesValue(jTable1, jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (jTextField2.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select a category");
+        } else {
+            int id = Integer.parseInt(jTextField2.getText());
+            if (cat.isIDExist(id)) {
+                cat.delete(id);
+                jTable1.setModel(new DefaultTableModel(null, new Object[]{"Category ID", "Category Name", "Description"}));
+                cat.getCategoriesValue(jTable1, "");
+                clear();
+            } else {
+                JOptionPane.showMessageDialog(this, "Category doesn't exist", "Warning", 2);
+            }
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private boolean check() {
+        String newCategory = jTextField3.getText();
+        String oldCategory = model.getValueAt(rowIndex, 1).toString();
+
+        if (newCategory.equals(oldCategory)) {
+            return false;
+        } else {
+            if (!newCategory.equals(oldCategory)) {
+                boolean x = cat.isCategoryExist(newCategory);
+                if (x) {
+                    JOptionPane.showMessageDialog(this, "This category name already exists", "Warning", 2);
+                }
+                return x;
+            }
+        }
+        return false;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
