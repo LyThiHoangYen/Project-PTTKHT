@@ -1,9 +1,11 @@
 
 package admin;
+import dao.PurchaseDao;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import user.Login;
 
 
@@ -15,12 +17,15 @@ public class Transaction extends javax.swing.JFrame {
     Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153,153,153);
     int xx, xy;
-
+    DefaultTableModel model;
+    PurchaseDao purchaseDao = new PurchaseDao();
     /**
      * Creates new form Transaction
      */
     public Transaction() {
         initComponents();
+        transactionTable();
+        setLocation(450, 180);
     }
 
     /**
@@ -40,7 +45,6 @@ public class Transaction extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -88,6 +92,12 @@ public class Transaction extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -140,6 +150,15 @@ public class Transaction extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void transactionTable() {
+        purchaseDao.transaction(jTable1, "");
+        model = (DefaultTableModel) jTable1.getModel();
+        jTable1.setRowHeight(30);
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(Color.BLACK);
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.LIGHT_GRAY);
+    }
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
         AdminDashboard.TransactionPanel.setBackground(primaryColor);
@@ -168,6 +187,12 @@ public class Transaction extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);      }//GEN-LAST:event_kGradientPanel1MouseDragged
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Purchase ID", "User ID",
+                "Product ID", "Quantity", "Price","Total", "Received Date", "Supplier Name"}));
+        purchaseDao.transaction(jTable1,jTextField1.getText());
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments

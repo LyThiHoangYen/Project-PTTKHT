@@ -1,6 +1,7 @@
 package admin;
 
 import dao.UserDao;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,12 +19,14 @@ public class ManageUser extends javax.swing.JFrame {
     Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153, 153, 153);
     int xx, xy;
+    statistics statistics = new statistics();
     DefaultTableModel model;
     int rowIndex;
 
     public ManageUser() {
         initComponents();
         usersTable();
+        setLocation(450, 110);
     }
 
     /**
@@ -493,6 +496,7 @@ public class ManageUser extends javax.swing.JFrame {
         jTextField7.setText("");
         jPasswordField2.setText("");
         jTable1.clearSelection();
+        statistics.admin();
     }
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -632,9 +636,7 @@ public class ManageUser extends javax.swing.JFrame {
                 String seq = jTextField8.getText();
                 String ans = jTextField4.getText();
                 String address = jTextField6.getText();
-
                 user.update(id, username, email, password, phone, address, seq, ans);
-
                 jTable1.setModel(new DefaultTableModel(null, new Object[]{"User ID", "User Name", "Email", "Password",
                     "Phone", "Address", "Security Question", "Answer"}));
                 user.getUsersValue(jTable1, "");

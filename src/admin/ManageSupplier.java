@@ -5,6 +5,7 @@
 package admin;
 
 import dao.SupplierDao;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ public class ManageSupplier extends javax.swing.JFrame {
     Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153, 153, 153);
     int xx, xy;
+    statistics statistics = new statistics();
     DefaultTableModel model;
     int rowIndex;
 
@@ -31,6 +33,7 @@ public class ManageSupplier extends javax.swing.JFrame {
     public ManageSupplier() {
         initComponents();
         supplierTable();
+        setLocation(450, 110);
     }
 
     /**
@@ -385,6 +388,7 @@ public class ManageSupplier extends javax.swing.JFrame {
         jTextField7.setText("");
         jTextField6.setText("");
         jPasswordField2.setText("");
+        statistics.admin();
 
     }
 

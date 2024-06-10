@@ -6,6 +6,7 @@ package user;
 
 import admin.AdminDashboard;
 import connection.MyConnection;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +24,7 @@ import java.sql.ResultSet;
  */
 public class Login extends javax.swing.JFrame {
     int xx, xy;
+    statistics statistics = new statistics();
 
     /**
      * Creates new form Login
@@ -433,6 +435,7 @@ public class Login extends javax.swing.JFrame {
                         ud.setVisible(true);
                         ud.pack();
                         UserDashboard.userEmail.setText(email);
+                        statistics.user(rs.getInt(1));
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);
@@ -453,6 +456,7 @@ public class Login extends javax.swing.JFrame {
                         ad.setVisible(true);
                         ad.pack();
                         AdminDashboard.adminEmail.setText(email);
+                        statistics.admin();
                         this.dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "Incorrect email or password", "Login Failed", 2);

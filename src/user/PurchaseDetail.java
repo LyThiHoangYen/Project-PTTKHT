@@ -3,22 +3,45 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package user;
+
+import admin.ManageProducts;
+import dao.PurchaseDao;
+import dao.UserDao;
+import dao.statistics;
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static user.UserDashboard.PurchaseDetails;
+
 /**
  *
  * @author ADMIN
  */
 public class PurchaseDetail extends javax.swing.JFrame {
+    statistics statistics = new statistics();
+    PurchaseDao pd = new PurchaseDao();
+    UserDao user = new UserDao();
     Color textPrimaryColor = new Color(0, 0, 0);
-    Color primaryColor = new Color(153,153,153);
+    Color primaryColor = new Color(153, 153, 153);
+    int rowIndex;
+    SimpleDateFormat df = new SimpleDateFormat("yyy-mm-dd", Locale.ENGLISH);
+    Date date = new Date();
+    private int uId;
+    DefaultTableModel model;
+
     /**
      * Creates new form PurchaseDetail
      */
     public PurchaseDetail() {
         initComponents();
+        init();
     }
     int xx, xy;
 
@@ -86,10 +109,20 @@ public class PurchaseDetail extends javax.swing.JFrame {
             }
         });
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jTextField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,6 +274,30 @@ public class PurchaseDetail extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init() {
+        jTextField4.setText(df.format(date));
+        uId = user.getUserId(UserDashboard.userEmail.getText());
+        productTable();
+        setLocation(450, 120);
+    }
+
+    private void productTable() {
+        pd.getProductsValue(jTable1, "", uId);
+        model = (DefaultTableModel) jTable1.getModel();
+        jTable1.setRowHeight(30);
+        jTable1.setShowGrid(true);
+        jTable1.setGridColor(Color.BLACK);
+        jTable1.setBackground(Color.WHITE);
+        jTable1.setSelectionBackground(Color.LIGHT_GRAY);
+    }
+
+    private void clear() {
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jTable1.clearSelection();
+    }
+
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         setVisible(false);
         UserDashboard.jPanel5.setBackground(primaryColor);
@@ -258,18 +315,47 @@ public class PurchaseDetail extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        if (jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Purchase id or received date is missing");
+        } else {
+            String receivedDate = jTextField3.getText();
+            String currentDate = jTextField4.getText();
+            try {
+                Date d1 = df.parse(receivedDate);
+                Date d2 = df.parse(currentDate);
+
+                long dateReceivedInMs = d1.getTime();
+                long dateCurrentInMs = d2.getTime();
+                long timeDiff = (dateCurrentInMs - dateReceivedInMs);
+                long daysDiff = TimeUnit.DAYS.convert(timeDiff, TimeUnit.MILLISECONDS);
+
+                if (daysDiff > 30) {
+                    JOptionPane.showMessageDialog(this, "Sorry refund time is over! \nRefund applicable 30 days from the received day...");
+                } else {
+                    int id = Integer.parseInt(jTextField2.getText());
+                    pd.refund(id);
+                    jTable1.setModel(new DefaultTableModel(null, new Object[]{"Purchase ID", "Product ID",
+                        "Product Name", "Quantity", "Price", "Total", "Purchased Date", "Received Date",
+                        "Supplier Name", "Status"}));
+                    pd.getProductsValue(jTable1, "", uId);
+                    statistics.user(user.getUserId(String.valueOf(UserDashboard.userEmail.getText())));
+                    clear();
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(PurchaseDetail.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        clear();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0.1; i<=1.0; i+=0.1){
-                String s = ""+i;
-                float f = Float.parseFloat(s);
-                this.setOpacity(f);            
+        for (double i = 0.1; i <= 1.0; i += 0.1) {
+            String s = "" + i;
+            float f = Float.parseFloat(s);
+            this.setOpacity(f);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -285,6 +371,24 @@ public class PurchaseDetail extends javax.swing.JFrame {
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
         this.setLocation(x - xx, y - xy);    }//GEN-LAST:event_kGradientPanel1MouseDragged
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        model = (DefaultTableModel) jTable1.getModel();
+        rowIndex = jTable1.getSelectedRow();
+        jTextField2.setText(model.getValueAt(rowIndex, 0).toString());
+        if (model.getValueAt(rowIndex, 7) == null) {
+            jTextField3.setText(null);
+        } else {
+            jTextField3.setText(model.getValueAt(rowIndex, 7).toString());
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+        jTable1.setModel(new DefaultTableModel(null, new Object[]{"Purchase ID", "Product ID",
+            "Product Name", "Quantity", "Price", "Total", "Purchased Date", "Received Date",
+            "Supplier Name", "Status"}));
+        pd.getProductsValue(jTable1, jTextField1.getText(), uId);
+    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -330,7 +434,7 @@ public class PurchaseDetail extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    public static javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

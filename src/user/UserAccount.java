@@ -476,7 +476,6 @@ public class UserAccount extends javax.swing.JFrame {
             String seq = jTextField8.getText();
             String ans = jTextField4.getText();
             String address = jTextField6.getText();
-            
             user.update(id,username, email, password, phone, address, seq, ans);
             this.dispose();
             setDefault();
