@@ -1,6 +1,7 @@
 package admin;
 
 import dao.ProductDao;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ public class ManageProducts extends javax.swing.JFrame {
     Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153, 153, 153);
     int xx, xy;
+    statistics statistics = new statistics();
     Color notEdit = new Color(204, 204, 204);
     DefaultTableModel model;
     int rowIndex;
@@ -334,6 +336,7 @@ public class ManageProducts extends javax.swing.JFrame {
         categories = new String[product.countCategories()];
         setCat();
         productTable();
+        setLocation(450, 180);
     }
 
     private void setCat() {
@@ -351,6 +354,7 @@ public class ManageProducts extends javax.swing.JFrame {
         jTextField5.setText("0");
         jTextField4.setText("0.0");
         jTable1.clearSelection();
+        statistics.admin();
     }
 
     private void productTable() {
@@ -368,11 +372,15 @@ public class ManageProducts extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Product name is required", "Warning", 2);
             return false;
         }
+        if (jTextField5.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Product price is required", "Warning", 2);
+            return false;
+        }
         if (Integer.parseInt(jTextField5.getText()) <= 0) {
             JOptionPane.showMessageDialog(this, "Please increase thhe product quantity", "Warning", 2);
             return false;
         }
-        if (jTextField4.getText().equals("0.0")) {
+        if (jTextField4.getText().equals("0.0") || jTextField4.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Product price is required", "Warning", 2);
             return false;
         }

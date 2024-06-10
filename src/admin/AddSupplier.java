@@ -2,6 +2,7 @@
 package admin;
 
 import dao.SupplierDao;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,8 +15,8 @@ public class AddSupplier extends javax.swing.JFrame {
     SupplierDao supplier = new SupplierDao();
     Color textPrimaryColor = new Color(0, 0, 0);
     Color primaryColor = new Color(153,153,153);
-   
     int xx, xy;
+    statistics statistics = new statistics();
     Color notEdit = new Color(204, 204, 204);
     /**
      * Creates new form AddSupplier
@@ -285,6 +286,7 @@ public class AddSupplier extends javax.swing.JFrame {
     private void init(){
         jTextField1.setBackground(notEdit);
         jTextField1.setText(String.valueOf(supplier.getMaxRow()));
+        setLocation(650, 200);
     }
     
     private void clear(){
@@ -294,7 +296,7 @@ public class AddSupplier extends javax.swing.JFrame {
         jTextField4.setText("");
         jTextField6.setText("");
         jPasswordField2.setText("");
-        
+        statistics.admin();
     }
     
      public boolean isEmpty() {

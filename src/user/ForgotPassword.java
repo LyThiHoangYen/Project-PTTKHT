@@ -20,9 +20,9 @@ public class ForgotPassword extends javax.swing.JFrame {
      * Creates new form ForgotPassword
      */
     ForgotPasswordDao fg = new ForgotPasswordDao();
-    Color notEdit = new Color(204,204,204);
-    Color edit = new Color(255,255,255);
-    
+    Color notEdit = new Color(204, 204, 204);
+    Color edit = new Color(255, 255, 255);
+
     public ForgotPassword() {
         initComponents();
         init();
@@ -272,7 +272,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void init(){
+    private void init() {
         jTextField5.setBackground(notEdit);
         jTextField6.setBackground(notEdit);
         jPasswordField2.setBackground(notEdit);
@@ -281,7 +281,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         jPasswordField2.setEditable(false);
         btnSave.setEnabled(false);
     }
-    
+
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
@@ -304,47 +304,47 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for(double i = 0.1; i<=1.0; i+=0.1){
-                String s = ""+i;
-                float f = Float.parseFloat(s);
-                this.setOpacity(f);            
+        for (double i = 0.1; i <= 1.0; i += 0.1) {
+            String s = "" + i;
+            float f = Float.parseFloat(s);
+            this.setOpacity(f);
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
                 Logger.getLogger(ForgotPassword.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }        
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-      jPasswordField2.setEchoChar((char) 0);
-      jLabel2.setVisible(true);
-      jLabel2.setEnabled(true);
-      jLabel10.setEnabled(false);
-      jLabel10.setEnabled(false);        
+        jPasswordField2.setEchoChar((char) 0);
+        jLabel2.setVisible(true);
+        jLabel2.setEnabled(true);
+        jLabel10.setEnabled(false);
+        jLabel10.setEnabled(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
-      jPasswordField2.setEchoChar('*');
-      jLabel2.setVisible(false);
-      jLabel2.setEnabled(false);
-      jLabel10.setEnabled(true);
-      jLabel10.setEnabled(true);   
+        jPasswordField2.setEchoChar('*');
+        jLabel2.setVisible(false);
+        jLabel2.setEnabled(false);
+        jLabel10.setEnabled(true);
+        jLabel10.setEnabled(true);
     }//GEN-LAST:event_jLabel10MouseClicked
-    
+
     private boolean isEmpty() {
         if (jTextField6.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Security answer is required", "Warning", 2);
             return false;
         }
-        if (String.valueOf(jPasswordField2.getPassword()).isEmpty()){
+        if (String.valueOf(jPasswordField2.getPassword()).isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter new password", "Warning", 2);
             return false;
         }
         return true;
     }
-    
-    private boolean emailValidation(){
+
+    private boolean emailValidation() {
         if (jTextField3.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please enter your email address", "Warning", 2);
             return false;
@@ -355,10 +355,10 @@ public class ForgotPassword extends javax.swing.JFrame {
         }
         return true;
     }
-    
+
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        if(emailValidation()){
-            if(fg.isEmailExist(jTextField3.getText())){
+        if (emailValidation()) {
+            if (fg.isEmailExist(jTextField3.getText())) {
                 jTextField3.setBackground(notEdit);
                 jTextField3.setEditable(false);
                 jTextField6.setBackground(edit);
@@ -371,7 +371,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel3MouseClicked
 
     private void btnSaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnSaveKeyPressed
-         // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_btnSaveKeyPressed
 
     private void btnSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveMouseClicked
@@ -379,13 +379,18 @@ public class ForgotPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveMouseClicked
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(isEmpty()){
+        if (isEmpty()) {
             String email = jTextField3.getText();
             String ans = jTextField6.getText();
-            if(fg.getAns(email, ans)){
+            if (fg.getAns(email, ans)) {
                 String pass = String.valueOf(jPasswordField2.getPassword());
+                System.out.print("\nhehe1\n");
+
                 fg.setPassword(email, pass);
+                System.out.print("\nhehe2\n");
+
                 new Login().setVisible(true);
+                System.out.print("\nhehe3\n");
                 this.dispose();
             }
         }
@@ -405,7 +410,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPasswordField jPasswordField2;
+    public static javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField3;
     public static javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;

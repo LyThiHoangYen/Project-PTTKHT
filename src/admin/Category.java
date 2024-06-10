@@ -1,6 +1,7 @@
 package admin;
 
 import dao.CategoryDao;
+import dao.statistics;
 import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ public class Category extends javax.swing.JFrame {
     Color notEdit = new Color(204, 204, 204);
     DefaultTableModel model;
     int rowIndex;
+    statistics statistics = new statistics();
 
     public Category() {
         initComponents();
@@ -206,7 +208,6 @@ public class Category extends javax.swing.JFrame {
                                     .addComponent(jTextField3)
                                     .addComponent(jTextField4)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
@@ -216,7 +217,8 @@ public class Category extends javax.swing.JFrame {
                                         .addGap(29, 29, 29)
                                         .addGroup(kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))))
+                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(27, 27, 27))))
@@ -276,6 +278,7 @@ public class Category extends javax.swing.JFrame {
         jTextField2.setBackground(notEdit);
         jTextField2.setText(String.valueOf(cat.getMaxRow()));
         categoryTable();
+        setLocation(450, 180);
     }
 
     private void categoryTable() {
@@ -294,6 +297,7 @@ public class Category extends javax.swing.JFrame {
         jTextField3.setText("");
         jTextField4.setText("");
         jTable1.clearSelection();
+        statistics.admin();
     }
 
     private boolean isEmpty() {

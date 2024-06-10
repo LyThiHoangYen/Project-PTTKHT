@@ -75,9 +75,9 @@ public class UserDashboard extends javax.swing.JFrame {
         jPanel19 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jLabel33 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
-        jLabel38 = new javax.swing.JLabel();
+        jPro = new javax.swing.JLabel();
+        jPur = new javax.swing.JLabel();
+        jCat = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
 
@@ -293,17 +293,17 @@ public class UserDashboard extends javax.swing.JFrame {
         jLabel33.setForeground(new java.awt.Color(102, 102, 102));
         jLabel33.setText("Total Purchase:");
 
-        jLabel35.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel35.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel35.setText("0");
+        jPro.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPro.setForeground(new java.awt.Color(102, 102, 102));
+        jPro.setText("0");
 
-        jLabel36.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel36.setText("0.0");
+        jPur.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jPur.setForeground(new java.awt.Color(102, 102, 102));
+        jPur.setText("0.0");
 
-        jLabel38.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel38.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel38.setText("0");
+        jCat.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jCat.setForeground(new java.awt.Color(102, 102, 102));
+        jCat.setText("0");
 
         jLabel40.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel40.setForeground(new java.awt.Color(102, 102, 102));
@@ -326,17 +326,18 @@ public class UserDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel40)
                     .addComponent(jLabel41))
-                .addGap(23, 23, 23)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel35)
                     .addGroup(jPanel19Layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel38)))
-                .addGap(116, 116, 116)
+                        .addGap(42, 42, 42)
+                        .addComponent(jCat, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jPro, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
                 .addComponent(jLabel33)
                 .addGap(57, 57, 57)
-                .addComponent(jLabel36)
-                .addGap(206, 206, 206))
+                .addComponent(jPur, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(126, 126, 126))
         );
         jPanel19Layout.setVerticalGroup(
             jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -346,13 +347,13 @@ public class UserDashboard extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel41)
-                    .addComponent(jLabel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel33)
-                    .addComponent(jLabel36))
+                    .addComponent(jPur))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel40)
-                    .addComponent(jLabel35))
+                    .addComponent(jPro))
                 .addContainerGap())
         );
 
@@ -494,6 +495,7 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel Electrazone;
     public static javax.swing.JLabel Myaccount;
     public static javax.swing.JLabel PurchaseDetails;
+    public static javax.swing.JLabel jCat;
     public static javax.swing.JLabel jLabel10;
     public static javax.swing.JLabel jLabel12;
     public static javax.swing.JLabel jLabel13;
@@ -504,9 +506,6 @@ public class UserDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel41;
@@ -521,6 +520,8 @@ public class UserDashboard extends javax.swing.JFrame {
     public static javax.swing.JPanel jPanel4;
     public static javax.swing.JPanel jPanel5;
     public static javax.swing.JPanel jPanel6;
+    public static javax.swing.JLabel jPro;
+    public static javax.swing.JLabel jPur;
     private keeptoo.KGradientPanel kGradientPanel1;
     public static javax.swing.JLabel userEmail;
     // End of variables declaration//GEN-END:variables

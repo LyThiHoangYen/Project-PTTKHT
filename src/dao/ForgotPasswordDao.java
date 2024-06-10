@@ -42,7 +42,8 @@ public class ForgotPasswordDao {
             ps.setString(1, email);
             rs = ps.executeQuery();
             if(rs.next()){
-                String oldAns = rs.getString(7);
+                String oldAns = rs.getString(8);
+                System.out.print(rs.getString(8));
                 if(newAns.equals(oldAns)){
                     return true;
                 }else {
@@ -59,7 +60,7 @@ public class ForgotPasswordDao {
     
     //set new password
     public void setPassword(String email, String pass){
-        String sql = "update user set spassword = ? where semail = ?";
+        String sql = "update staff set spassword = ? where semail = ?";
         try {
             ps = con.prepareStatement (sql);
             ps.setString(1, pass);
